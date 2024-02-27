@@ -14,32 +14,32 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.entity.SubjectEntity;
-import com.example.demo.form.SubjectForm;
-import com.example.demo.service.SubjectService;
+import com.example.demo.entity.ShippingEntity;
+import com.example.demo.form.ShippingForm;
+import com.example.demo.service.ShippingService;
 
 /**
  * 科目情報 Controller
  */
 @Controller
-public class SubjectController {
+public class ShippingController {
 
 	/**
 	 * 科目情報 Service
 	 */
 	@Autowired
-	SubjectService subjectService;
+	ShippingService shippingService;
 
 	/**
 	 * 科目情報一覧画面を表示
 	 * @param  model Model
 	 * @return  科目情報一覧画面のHTML
 	 */
-	@GetMapping("/subject/list")
-	public String subjectList(Model model) {
-		List<SubjectEntity> subjectlist = subjectService.searchAll();
-		model.addAttribute("subjectlist", subjectlist);
-		return "subject/list";
+	@GetMapping("/shipping/list")
+	public String shippingList(Model model) {
+		List<ShippingEntity> shippinglist = shippingService.searchAll();
+		model.addAttribute("shippinglist", shippinglist);
+		return "shipping/list";
 	}
 	
 	/**
@@ -47,10 +47,10 @@ public class SubjectController {
 	 * @param  model Model
 	 * @return  科目情報一覧画面
 	 */
-	@GetMapping("/subject/add")
-	public String subjectRegister(Model model) {
-		model.addAttribute("subjectRequest", new SubjectForm());
-		return "subject/add";
+	@GetMapping("/shipping/add")
+	public String shippingRegister(Model model) {
+		model.addAttribute("shippingRequest", new ShippingForm());
+		return "shipping/add";
 	}
 	
 	/**
@@ -59,17 +59,17 @@ public class SubjectController {
 	 * @param  model Model
 	 * @return  科目情報一覧画面
 	 */
-	@PostMapping("/subject/create")
-	public String subjectCreate(@Validated  @ModelAttribute  SubjectForm subjectRequest, BindingResult result, Model model) {
+	@PostMapping("/shipping/create")
+	public String shippingCreate(@Validated  @ModelAttribute  ShippingForm shippingRequest, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			// 入力チェックエラーの場合
 			List<String> errorList = new ArrayList<String>();
 			for (ObjectError error : result.getAllErrors()) {
 				errorList.add(error.getDefaultMessage());
 			}
-			model.addAttribute("subjectRequest", new SubjectForm());
+			model.addAttribute("shippingRequest", new ShippingForm());
 			model.addAttribute("validationError", errorList);
-			return "subject/add";
+			return "shipping/add";
 		}
 		// 科目情報の登録
 		subjectService.create(subjectRequest);
@@ -84,7 +84,7 @@ public class SubjectController {
 	 */
 	@GetMapping("/subject/{id}")
 	public String userDetail(@PathVariable  Integer id, Model model) {
-		SubjectEntity subject = subjectService.findById(id);
+		ShippingEntity subject = subjectService.findById(id);
 		model.addAttribute("subject", subject);
 		return "subject/detail";
 	}
@@ -97,8 +97,8 @@ public class SubjectController {
 	 */
 	@GetMapping("/subject/{id}/edit")
 	public String userEdit(@PathVariable  Integer id, Model model) {
-		SubjectEntity subject = subjectService.findById(id);
-		SubjectForm subjectUpdateRequest = new SubjectForm();
+		ShippingEntity subject = subjectService.findById(id);
+		ShippingForm subjectUpdateRequest = new ShippingForm();
 		subjectUpdateRequest.setId(subject.getId());
 		subjectUpdateRequest.setSubject(subject.getSubject());
 		model.addAttribute("subjectUpdateRequest", subjectUpdateRequest);
@@ -112,7 +112,7 @@ public class SubjectController {
 	 * @return  科目情報詳細画面
 	 */
 	@PostMapping("/subject/update")
-	public String subjectUpdate(@Validated  @ModelAttribute  SubjectForm subjectUpdateRequest, BindingResult result, Model model) {
+	public String subjectUpdate(@Validated  @ModelAttribute  ShippingForm subjectUpdateRequest, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			List<String> errorList = new ArrayList<String>();
 			for (ObjectError error : result.getAllErrors()) {

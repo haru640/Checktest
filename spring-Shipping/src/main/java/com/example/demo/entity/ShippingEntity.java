@@ -14,8 +14,8 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "subject")
-public class SubjectEntity  {
+@Table(name = "shipping")
+public class ShippingEntity  {
 
 	/**
 	 * ID
@@ -25,9 +25,13 @@ public class SubjectEntity  {
 	@Column(name = "id")
 	private Integer id;
 
-	/**
-	 * 科目
-	 */
-	@Column(name = "subject")
-	private String subject;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "age")
+	private String age;
 }
