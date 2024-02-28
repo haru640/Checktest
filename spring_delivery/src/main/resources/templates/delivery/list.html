@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/head :: head_fragment(title = '配達先情報一覧', scripts = ~{::script}, links = ~{::link})"></head>
+
+<body>
+	<div class="container">
+		<h1>配達先情報一覧</h1>
+		<div class="float-end">
+			<a th:href="@{/delivery/add}" class="btn btn-primary">新規登録はこちら</a>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>名前</th>
+					<th>配達物</th>
+					<th>住所</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="delivery : ${deliverylist}" th:object="${delivery}" class="align-middle">
+					<td th:text="*{id}"></td>
+					<td th:text="*{name}"></td>
+					<td th:text="*{deliveryitem}"></td>
+					<td th:text="*{address}"></td>
+					<td><a th:href="@{/delivery/{id}(id=*{id})}" class="btn btn-secondary">詳細</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

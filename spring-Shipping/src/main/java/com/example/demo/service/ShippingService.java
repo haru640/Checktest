@@ -52,10 +52,10 @@ public class ShippingService {
 	 * 科目情報 更新
 	 * @param  subject 科目情報
 	 */
-	public void update(ShippingForm subjectUpdateRequest) {
-		ShippingEntity subject = findById(subjectUpdateRequest.getId());
-		subject.setSubject(subjectUpdateRequest.getSubject());
-		subjectRepository.save(subject);
+	public void update(ShippingForm shippingUpdateRequest) {
+		ShippingEntity shipping = findById(shippingUpdateRequest.getId());
+		shipping.setShipping(shippingUpdateRequest.getShipping());
+		shippingRepository.save(shipping);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class ShippingService {
 	 * @param  id ID
 	 */
 	public void delete(Integer id) {
-		ShippingEntity subject = findById(id);
-		subjectRepository.delete(subject);
+		ShippingEntity shipping = findById(id);
+		shippingRepository.delete(shipping);
 	}
 }
